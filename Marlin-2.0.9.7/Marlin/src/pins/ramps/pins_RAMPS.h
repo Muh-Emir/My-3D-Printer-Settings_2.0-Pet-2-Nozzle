@@ -224,14 +224,14 @@
     #define FAN1_PIN                MOSFET_D_PIN
   #endif
 #endif
-
+//Değişen pin fanayar
 #ifndef FAN_PIN
   #if EITHER(FET_ORDER_EFB, FET_ORDER_EFF)        // Hotend, Fan, Bed or Hotend, Fan, Fan
     #define FAN_PIN                 MOSFET_B_PIN
   #elif EITHER(FET_ORDER_EEF, FET_ORDER_SF)       // Hotend, Hotend, Fan or Spindle, Fan
     #define FAN_PIN                 MOSFET_C_PIN
   #elif FET_ORDER_EEB                             // Hotend, Hotend, Bed
-    #define FAN_PIN                            4  // IO pin. Buffer needed
+    #define FAN_PIN                            6  // IO pin. Buffer needed
   #else                                           // Non-specific are "EFB" (i.e., "EFBF" or "EFBE")
     #define FAN_PIN                 MOSFET_B_PIN
   #endif
