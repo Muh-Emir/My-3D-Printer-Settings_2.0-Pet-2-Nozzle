@@ -266,7 +266,7 @@
  * Two separate X-carriages with extruders that connect to a moving part
  * via a magnetic docking mechanism using movements and no solenoid
  *
- * project   : https://www.thingiverse.com/thing:3080893
+ * project   : https://www.thingiverse.com/thing:30893
  * movements : https://youtu.be/0xCEiG9VS3k
  *             https://youtu.be/Bqbcs0CU2FE
  */
@@ -282,7 +282,7 @@
     #define PARKING_EXTRUDER_SOLENOIDS_INVERT           // If enabled, the solenoid is NOT magnetized with applied voltage
     #define PARKING_EXTRUDER_SOLENOIDS_PINS_ACTIVE LOW  // LOW or HIGH pin signal energizes the coil
     #define PARKING_EXTRUDER_SOLENOIDS_DELAY 250        // (ms) Delay for magnetic field. No delay if 0 or not defined.
-    //#define MANUAL_SOLENOID_CONTROL                   // Manual control of docking solenoids with M380 S / M381
+    //#define MANUAL_SOLENOID_CONTROL                   // Manual control of docking solenoids with M3 S / M381
 
   #elif ENABLED(MAGNETIC_PARKING_EXTRUDER)
 
@@ -327,7 +327,7 @@
   #define SWITCHING_TOOLHEAD_X_POS          { 215, 0 }  // (mm) X positions for parking the extruders
   #if ENABLED(SWITCHING_TOOLHEAD)
     #define SWITCHING_TOOLHEAD_SERVO_NR       2         // Index of the servo connector
-    #define SWITCHING_TOOLHEAD_SERVO_ANGLES { 0, 180 }  // (degrees) Angles for Lock, Unlock
+    #define SWITCHING_TOOLHEAD_SERVO_ANGLES { 0, 1 }  // (degrees) Angles for Lock, Unlock
   #elif ENABLED(MAGNETIC_SWITCHING_TOOLHEAD)
     #define SWITCHING_TOOLHEAD_Y_RELEASE      5         // (mm) Security distance Y axis
     #define SWITCHING_TOOLHEAD_X_SECURITY   { 90, 150 } // (mm) Security distance X axis (T0,T1)
@@ -387,7 +387,7 @@
   //#define PS_OFF_SOUND            // Beep 1s when power off
   #define PSU_ACTIVE_STATE LOW      // Set 'LOW' for ATX, 'HIGH' for X-Box
 
-  //#define PSU_DEFAULT_OFF               // Keep power off until enabled directly with M80
+  //#define PSU_DEFAULT_OFF               // Keep power off until enabled directly with M
   //#define PSU_POWERUP_DELAY      250    // (ms) Delay for the PSU to warm up to full power
   //#define LED_POWEROFF_TIMEOUT 10000    // (ms) Turn off LEDs after power-off, with this amount of delay
 
@@ -420,6 +420,17 @@
 // @section temperature
 
 /**
+ * 
+ * Teknik Özellikler:
+ *
+ *   100K NTC Sıcaklık Sensörü
+ *   Model: B2-100-3950
+ *   R(25°): 100K ± %1
+ *   B: 3950 ± %1 (25° ve 50 °C sıcaklık değerlerinde hesaplanır.)
+ *   Çalışma Sıcaklığı: -50°C ~ 260°C
+ *   3D yazıcılarla uyumludur.
+ *   Kablo Uzunluğu: 1 Metre
+ *  
  * --NORMAL IS 4.7kΩ PULLUP!-- 1kΩ pullup can be used on hotend sensor, using correct resistor and table
  *
  * Temperature sensors available:
@@ -452,7 +463,7 @@
  *     4 : 10kΩ   Generic Thermistor !! DO NOT use for a hotend - it gives bad resolution at high temp. !!
  *     5 : 100kΩ  ATC Semitec 104GT-2/104NT-4-R025H42G - Used in ParCan, J-Head, and E3D, SliceEngineering 300°C
  *   501 : 100kΩ  Zonestar - Tronxy X3A
- *   502 : 100kΩ  Zonestar - used by hot bed in Zonestar Průša P802M
+ *   502 : 100kΩ  Zonestar - used by hot bed in Zonestar Průša P2M
  *   503 : 100kΩ  Zonestar (Z8XM2) Heated Bed thermistor
  *   504 : 100kΩ  Zonestar P802QR2 (Part# QWG-104F-B3950) Hotend Thermistor
  *   505 : 100kΩ  Zonestar P802QR2 (Part# QWG-104F-3950) Bed Thermistor
@@ -512,8 +523,8 @@
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  *
  */
-#define TEMP_SENSOR_0 11
-#define TEMP_SENSOR_1 11
+#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_1 1
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
@@ -581,15 +592,15 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 290
-#define HEATER_1_MAXTEMP 275
+#define HEATER_0_MAXTEMP 320
+#define HEATER_1_MAXTEMP 315
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      150
+#define BED_MAXTEMP      125
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -1031,7 +1042,7 @@
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 #define X_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
+#define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define I_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define J_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define K_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
@@ -1041,7 +1052,7 @@
 #define I_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define J_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define K_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -1059,7 +1070,7 @@
  *
  * :[2,3,4,5,6,7]
  */
-//#define ENDSTOP_NOISE_THRESHOLD 2
+#define ENDSTOP_NOISE_THRESHOLD 2
 
 // Check for stuck or disconnected endstops during homing moves.
 //#define DETECT_BROKEN_ENDSTOP
@@ -1089,7 +1100,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 81, 82, 1645, 98 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 82, 82, 1645, 99 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1244,7 +1255,7 @@
  * Z Servo Probe, such as an endstop switch on a rotating arm.
  */
 #define Z_PROBE_SERVO_NR 0       // Defaults to SERVO 0 connector.
-#define Z_SERVO_ANGLES { 90, 0 } // Z Servo Deploy and Stow angles
+#define Z_SERVO_ANGLES {155 , 103 } // Z Servo Deploy and Stow angles
 
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
@@ -1380,22 +1391,24 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
- //z_mesafe
-#define NOZZLE_TO_PROBE_OFFSET { -51, -9, -8 }
+ //z_mesafe                       X     Y     Z
+#define NOZZLE_TO_PROBE_OFFSET { 30, -37, 0 }
+//Nozzle: 77  /  94  / 0.06
+//Probe:  47  /  135 / 0.06
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
 //  g29 hatası bu
-#define PROBING_MARGIN 10
+#define PROBING_MARGIN 20
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE (133*60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (4*60)
+#define Z_PROBE_FEEDRATE_FAST (3*60)
 
 // Feedrate (mm/min) for the "accurate" probe of each point
-#define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
+#define Z_PROBE_FEEDRATE_SLOW (2*60)
 
 /**
  * Probe Activation Switch
@@ -1443,7 +1456,7 @@
  * A total of 3 or more adds more slow probes, taking the average.
  */
 #define MULTIPLE_PROBING 2
-//#define EXTRA_PROBING    1
+#define EXTRA_PROBING    1
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1564,7 +1577,7 @@
  */
 //#define Z_IDLE_HEIGHT Z_HOME_POS
 
-//#define Z_HOMING_HEIGHT  5      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT  5      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
 //#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
@@ -1581,8 +1594,8 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 180
-#define Y_BED_SIZE 165
+#define X_BED_SIZE 195
+#define Y_BED_SIZE 160
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1590,7 +1603,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 170
+#define Z_MAX_POS 160
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -1607,7 +1620,7 @@
  * - Use 'M211' to set software endstops on/off or report current state
  */
 
-// Min software endstops constrain movement within minimum coordinate bounds
+// Min software endstops constrain movement within minimum coordinate bounds son_deneme_1
 #define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
@@ -1757,8 +1770,8 @@
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-#define RESTORE_LEVELING_AFTER_G28
-//#define ENABLE_LEVELING_AFTER_G28
+//#define RESTORE_LEVELING_AFTER_G28
+#define ENABLE_LEVELING_AFTER_G28
 
 /**
  * Auto-leveling needs preheating
@@ -1802,10 +1815,10 @@
   
   #define G26_MESH_VALIDATION
   #if ENABLED(G26_MESH_VALIDATION)
-    #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
+    #define MESH_TEST_NOZZLE_SIZE    0.5  // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for G26.
     #define MESH_TEST_HOTEND_TEMP  205    // (°C) Default nozzle temperature for G26.
-    #define MESH_TEST_BED_TEMP      60    // (°C) Default bed temperature for G26.
+    #define MESH_TEST_BED_TEMP      65    // (°C) Default bed temperature for G26.
     #define G26_XY_FEEDRATE         20    // (mm/s) Feedrate for G26 XY moves.
     #define G26_XY_FEEDRATE_TRAVEL 100    // (mm/s) Feedrate for G26 XY travel moves.
     #define G26_RETRACT_MULTIPLIER   1.0  // G26 Q (retraction) used by default between mesh test elements.
@@ -1816,7 +1829,7 @@
 #if EITHER(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 5
+  #define GRID_MAX_POINTS_X 4
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
   
   // Probe along the Y axis, advancing X after each column
@@ -1936,8 +1949,8 @@
 
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
-#define MANUAL_X_HOME_POS -12
-//#define MANUAL_Y_HOME_POS 0
+//#define MANUAL_X_HOME_POS 0
+#define MANUAL_Y_HOME_POS -15
 //#define MANUAL_Z_HOME_POS 0
 //#define MANUAL_I_HOME_POS 0
 //#define MANUAL_J_HOME_POS 0
@@ -1953,12 +1966,12 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT 100 //X_CENTER  // X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT 90  //Y_CENTER  // Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (3*60) }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2294,11 +2307,11 @@
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
-#define DISPLAY_CHARSET_HD44780 JAPANESE
+#define DISPLAY_CHARSET_HD447 JAPANESE
 
 /**
  * Info Screen Style (0:Classic, 1:Průša)
- *
+ *Prusa ekran
  * :[0:'Classic', 1:'Průša']
  */
 #define LCD_INFO_SCREEN_STYLE 0
@@ -2581,84 +2594,26 @@
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //Ekrans
 #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
-#define DOGLCD
-#define U8GLIB_ST7920
-#define ST7920_DELAY_1 DELAY_NS(0) 
-#define ST7920_DELAY_2 DELAY_NS(250) 
-#define ST7920_DELAY_3 DELAY_NS(250)
-/**
-#define DOGLCD
-#define U8GLIB_ST7920
-#define ST7920_DELAY_1 DELAY_NS(0) 
-#define ST7920_DELAY_2 DELAY_NS(250) 
-#define ST7920_DELAY_3 DELAY_NS(250)
-//yeni
-//automatic expansion
-#if defined (MAKRPANEL)
- #define DOGLCD
- #define SDSUPPORT
- #define ULTIPANEL
- #define NEWPANEL
- #define DEFAULT_LCD_CONTRAST 17
-#endif
 
-#if defined (REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
- #define DOGLCD
- #define U8GLIB_ST7920
- #define REPRAP_DISCOUNT_SMART_CONTROLLER
- #define ENCODER_PULSES_PER_STEP 4
- #define ENCODER_STEPS_PER MENU_ITEM 1
-#endif
+#if defined(REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
 
-#if defined(ULTIMAKERCONTROLLER) || defined(REPRAP_DISCOUNT_SMART_CONTROLLER) || defined(G3D_PANEL)
- #define ULTIPANEL
- #define NEWPANEL
-#endif
-
-#if defined(REPRAPWORLD_KEYPAD)
+  //#define REPRAP_DISCOUNT_SMART_CONTROLLER // Reprap Discount ekranı için gerekli tanım
+  #define U8GLIB_ST7920           // ST7920 ekran kütüphanesi
+  #define ST7920_DELAY_1 DELAY_NS(0) 
+  #define ST7920_DELAY_2 DELAY_NS(250) 
+  #define ST7920_DELAY_3 DELAY_NS(250)
+  
   #define NEWPANEL
-  #define ULTIPANEL
+  #define DOGLCD  // DOG grafik ekranı desteği
+  
+  #ifdef DOGLCD
+    #ifndef DEFAULT_LCD_CONTRAST
+      #define DEFAULT_LCD_CONTRAST 32
+    #endif
+  #endif
 #endif
 
-#if defined(RA_CONTROL_PANEL)
- #define ULTIPANEL
- #define NEWPANEL
- #define LCD_I2C_TYPE_PCA8574
- #define LCD_I2C_ADDRESS 0x27   // I2C Address of the port expander
-#endif
 
-//2
-#ifdef ULTIPANEL
-//  #define NEWPANEL  //enable this if you have a click-encoder panel
-  #define SDSUPPORT
-  #define ULTRA_LCD
-  #ifdef DOGLCD // Change number of lines to match the DOG graphic display
-    #define LCD_WIDTH 20
-    #define LCD_HEIGHT 5
-  #else
-    #define LCD_WIDTH 20
-    #define LCD_HEIGHT 4
-  #endif
-#else //no panel but just lcd
-  #ifdef ULTRA_LCD
-  #ifdef DOGLCD // Change number of lines to match the 128x64 graphics display
-    #define LCD_WIDTH 20
-    #define LCD_HEIGHT 5
-  #else
-    #define LCD_WIDTH 16
-    #define LCD_HEIGHT 2
-  #endif
-  #endif
-#endif
-#ifdef DOGLCD
-# ifndef DEFAULT_LCD_CONTRAST
-#  define DEFAULT_LCD_CONTRAST 32
-# endif
-#endif
-#define FAST_PWM_FAN 255
-#define SOFT_PWM_SCALE 0
-//yeniend
-*/
 //
 // ReprapWorld Graphical LCD
 // https://reprapworld.com/?products_details&products_id/1218
@@ -2898,7 +2853,7 @@
 //#define MALYAN_LCD
 
 //
-// Touch UI for FTDI EVE (FT800/FT810) displays
+// Touch UI for FTDI EVE (FT0/FT810) displays
 // See Configuration_adv.h for all configuration options.
 //
 //#define TOUCH_UI_FTDI_EVE
@@ -2937,7 +2892,7 @@
  */
 
 //
-// 480x320, 3.5", SPI Display with Rotary Encoder from MKS
+// 4x320, 3.5", SPI Display with Rotary Encoder from MKS
 // Usually paired with MKS Robin Nano V2 & V3
 //
 //#define MKS_TS35_V2_0
@@ -2961,13 +2916,13 @@
 //#define MKS_ROBIN_TFT32
 
 //
-// 480x320, 3.5", FSMC Display From MKS
+// 4x320, 3.5", FSMC Display From MKS
 // Usually paired with MKS Robin Nano V1.2
 //
 //#define MKS_ROBIN_TFT35
 
 //
-// 480x272, 4.3", FSMC Display From MKS
+// 4x272, 4.3", FSMC Display From MKS
 //
 //#define MKS_ROBIN_TFT43
 
@@ -2978,12 +2933,12 @@
 //#define MKS_ROBIN_TFT_V1_1R
 
 //
-// 480x320, 3.5", FSMC Stock Display from TronxXY
+// 4x320, 3.5", FSMC Stock Display from TronxXY
 //
 //#define TFT_TRONXY_X5SA
 
 //
-// 480x320, 3.5", FSMC Stock Display from AnyCubic
+// 4x320, 3.5", FSMC Stock Display from AnyCubic
 //
 //#define ANYCUBIC_TFT35
 
@@ -2998,7 +2953,7 @@
 //#define ANET_ET4_TFT28
 
 //
-// 480x320, 3.5", FSMC Stock Display from ET5
+// 4x320, 3.5", FSMC Stock Display from ET5
 //
 //#define ANET_ET5_TFT35
 
@@ -3008,7 +2963,7 @@
 //#define BIQU_BX_TFT70
 
 //
-// 480x320, 3.5", SPI Stock Display with Rotary Encoder from BIQU B1 SE Series
+// 4x320, 3.5", SPI Stock Display with Rotary Encoder from BIQU B1 SE Series
 //
 //#define BTT_TFT35_SPI_V1_0
 
@@ -3026,8 +2981,8 @@
 
   // TFT Resolution. Enable one of the following options:
   //#define TFT_RES_320x240
-  //#define TFT_RES_480x272
-  //#define TFT_RES_480x320
+  //#define TFT_RES_4x272
+  //#define TFT_RES_4x320
   //#define TFT_RES_1024x600
 #endif
 
@@ -3053,7 +3008,7 @@
  * TFT Rotation. Set to one of the following values:
  *
  *   TFT_ROTATE_90,  TFT_ROTATE_90_MIRROR_X,  TFT_ROTATE_90_MIRROR_Y,
- *   TFT_ROTATE_180, TFT_ROTATE_180_MIRROR_X, TFT_ROTATE_180_MIRROR_Y,
+ *   TFT_ROTATE_1, TFT_ROTATE_1_MIRROR_X, TFT_ROTATE_1_MIRROR_Y,
  *   TFT_ROTATE_270, TFT_ROTATE_270_MIRROR_X, TFT_ROTATE_270_MIRROR_Y,
  *   TFT_MIRROR_X, TFT_MIRROR_Y, TFT_NO_ROTATION
  */
@@ -3239,12 +3194,12 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-#define NUM_SERVOS 1 // Note: Servo index starts with 0 for M280-M282 commands
+#define NUM_SERVOS 1 // Note: Servo index starts with 0 for M2-M282 commands
 
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY { 300 }
+#define SERVO_DELAY { 350 }
 
 // Only power servos during movement, otherwise leave off to prevent jitter
 //#define DEACTIVATE_SERVOS_AFTER_MOVE
